@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://k0q28bmmsid6"]
+
+[ext_resource type="SpriteFrames" uid="uid://cvhx52obfw0g4" path="res://VFX Free Pack/Effect_Impact/Effect_Impact.tres" id="1_7mxku"]
+
+[node name="LaserHit" type="AnimatedSprite3D"]
+billboard = 1
+sprite_frames = ExtResource("1_7mxku")
+
+[connection signal="animation_finished" from="." to="." method="queue_free"]
+[connection signal="tree_entered" from="." to="." method="play" binds= ["default"]]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cc2w2krr7d5cw"]
+[gd_scene load_steps=16 format=3 uid="uid://cc2w2krr7d5cw"]
 
 [ext_resource type="PackedScene" uid="uid://bj6ouwmmb5pap" path="res://spaceship/spaceship.tscn" id="1_h2yge"]
 [ext_resource type="PackedScene" uid="uid://g8whwheybpp7" path="res://stars/stars.tscn" id="3_1bvp3"]
@@ -7,6 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://benfxvy65dh02" path="res://asteroids/asteroid2.tscn" id="5_272bh"]
 [ext_resource type="PackedScene" uid="uid://bjkuhtroe0g2e" path="res://asteroids/asteroid3.tscn" id="6_5vw27"]
 [ext_resource type="PackedScene" uid="uid://cop0h1qf4te4d" path="res://asteroids/asteroid4.tscn" id="7_kek77"]
+[ext_resource type="PackedScene" uid="uid://dx0fgk3nsun8c" path="res://asteroids/asteroid5.tscn" id="8_kek77"]
+[ext_resource type="Script" uid="uid://brldmmchbxeev" path="res://stars/killer.gd" id="9_kek77"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_272bh"]
 friction = 0.0
@@ -18,6 +20,35 @@ absorbent = true
 [sub_resource type="Environment" id="Environment_h2yge"]
 background_mode = 1
 glow_enabled = true
+
+[sub_resource type="GDScript" id="GDScript_kek77"]
+script/source = "extends Node3D
+
+@export var asteroids: Array[PackedScene]
+@export var spawn_rate: float
+
+var spawn_timer: float = 0.0
+
+func _process(delta: float) -> void:
+	spawn_timer += delta
+	while spawn_timer > 0:
+		spawn_star()
+		spawn_timer -= 1.0 / spawn_rate;
+
+func spawn_star():
+	var near_corner = global_position - $CollisionShape3D.shape.extents
+	var far_corner = global_position + $CollisionShape3D.shape.extents
+	var new_asteroid: Node3D = asteroids.pick_random().instantiate()
+	new_asteroid.position.x = randf_range(near_corner.x, far_corner.x)
+	new_asteroid.position.y = randf_range(near_corner.y, far_corner.y)
+	new_asteroid.position.z = randf_range(near_corner.z, far_corner.z)
+	get_parent().add_child(new_asteroid)
+"
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7mycd"]
+size = Vector3(120, 1, 1)
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_5vw27"]
 
 [node name="MainRoot" type="Node3D"]
 
@@ -63,19 +94,29 @@ transform = Transform3D(1, 0, 0, 0, 1, 1.06581e-14, 0, -1.06581e-14, 1, 0, 0, 0)
 
 [node name="Stars" parent="Environment" instance=ExtResource("3_1bvp3")]
 
-[node name="Asteroid" parent="." instance=ExtResource("4_1bvp3")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.8515, 12.1976, 0)
+[node name="Asteroids" type="Node3D" parent="."]
 
-[node name="Asteroid2" parent="." instance=ExtResource("5_272bh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.7486, 22.2474, 0)
+[node name="AsteroidSpawner" type="Node3D" parent="Asteroids"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 40, 0)
+script = SubResource("GDScript_kek77")
+asteroids = Array[PackedScene]([ExtResource("4_1bvp3"), ExtResource("5_272bh"), ExtResource("6_5vw27"), ExtResource("7_kek77"), ExtResource("8_kek77")])
+spawn_rate = 10.0
 
-[node name="Asteroid3" parent="." instance=ExtResource("6_5vw27")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.88357, 23.5579, 3.8147e-06)
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Asteroids/AsteroidSpawner"]
+shape = SubResource("BoxShape3D_7mycd")
 
-[node name="Asteroid4" parent="." instance=ExtResource("7_kek77")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.02149, 15.4099, 0)
+[node name="AsteroidKiller" type="Area3D" parent="Asteroids"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -40, 0)
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+script = ExtResource("9_kek77")
 
-[connection signal="body_entered" from="Asteroid" to="Asteroid/Damager" method="deal_damage_to"]
-[connection signal="body_entered" from="Asteroid2" to="Asteroid2/Damager" method="deal_damage_to"]
-[connection signal="body_entered" from="Asteroid3" to="Asteroid3/Damager" method="deal_damage_to"]
-[connection signal="body_entered" from="Asteroid4" to="Asteroid4/Damager" method="deal_damage_to"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Asteroids/AsteroidKiller"]
+shape = SubResource("WorldBoundaryShape3D_5vw27")
+
+[node name="AudioListener3D" type="AudioListener3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 50)
+current = true
+
+[connection signal="body_entered" from="Asteroids/AsteroidKiller" to="Asteroids/AsteroidKiller" method="kill"]

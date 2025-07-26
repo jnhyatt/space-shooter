@@ -27,34 +27,6 @@ shader_parameter/impact_falloff_sharpness = 1.0
 radius = 4.5
 height = 9.0
 
-[sub_resource type="Animation" id="Animation_xs0r8"]
-resource_name = "shield_drop"
-length = 1.6
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("MeshInstance3D:material_override:shader_parameter/color")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1.6),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(0.220274, 0.674508, 1, 1), Color(0.333333, 0.72549, 1, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("MeshInstance3D:material_override:shader_parameter/fresnel_sharpness")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.133333),
-"transitions": PackedFloat32Array(0.297302, 1),
-"update": 0,
-"values": [8.0, 1.055]
-}
-
 [sub_resource type="Animation" id="Animation_08jab"]
 length = 0.001
 tracks/0/type = "value"
@@ -132,6 +104,34 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1.46409, 1),
 "update": 0,
 "values": [5.0, 8.0]
+}
+
+[sub_resource type="Animation" id="Animation_xs0r8"]
+resource_name = "shield_drop"
+length = 1.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D:material_override:shader_parameter/color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.220274, 0.674508, 1, 1), Color(0.333333, 0.72549, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MeshInstance3D:material_override:shader_parameter/fresnel_sharpness")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.133333),
+"transitions": PackedFloat32Array(0.297302, 1),
+"update": 0,
+"values": [8.0, 1.055]
 }
 
 [sub_resource type="Animation" id="Animation_brwsj"]

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://joplnmc7f7gb" path="res://stars/star_spawner.gd" id="1_t8hj0"]
 [ext_resource type="PackedScene" uid="uid://dl3jeytaew5fq" path="res://stars/star.tscn" id="2_4o143"]
-[ext_resource type="Script" uid="uid://brldmmchbxeev" path="res://stars/star_killer.gd" id="3_h55bb"]
+[ext_resource type="Script" uid="uid://brldmmchbxeev" path="res://stars/killer.gd" id="3_h55bb"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_7mycd"]
 size = Vector3(800, 1, 800)

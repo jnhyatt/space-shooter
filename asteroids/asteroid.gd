@@ -1,6 +1,7 @@
 extends RigidBody3D
 
-var hp: int = 50
+@export var max_hp: int = 200
+var hp: int = max_hp
 
 func _ready():
 	linear_velocity = Vector3(

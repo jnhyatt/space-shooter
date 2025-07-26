@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://k4jg4hwp27yf"]
+
+[ext_resource type="Script" uid="uid://btxeom0jxoyg8" path="res://spawn_on_death.gd" id="1_163n4"]
+
+[node name="SpawnOnDeath" type="Node3D"]
+script = ExtResource("1_163n4")
