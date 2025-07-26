@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://dvherl3om1u0d"]
+
+[ext_resource type="Script" uid="uid://dnc7rkwkma4rx" path="res://spaceship/weapons.gd" id="1_6bj3x"]
+[ext_resource type="PackedScene" uid="uid://d3j158iycdavv" path="res://spaceship/laser_gun.tscn" id="2_vy4ea"]
+
+[node name="Weapons" type="Node3D" node_paths=PackedStringArray("gun_points")]
+script = ExtResource("1_6bj3x")
+gun_points = [NodePath("RightLaser"), NodePath("LeftLaser")]
+
+[node name="RightLaser" parent="." instance=ExtResource("2_vy4ea")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.25, 1.85031, 0)
+
+[node name="LeftLaser" parent="." instance=ExtResource("2_vy4ea")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.25, 1.85, 0)
+
+[node name="LaserCooldown" type="Timer" parent="."]
+wait_time = 0.12
+
+[connection signal="timeout" from="LaserCooldown" to="." method="fire"]

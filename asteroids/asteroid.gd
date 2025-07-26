@@ -15,7 +15,6 @@ func _ready():
 	)
 
 func take_damage(amount: int):
-	print("Ouch")
 	hp -= amount
 	if hp <= 0:
 		queue_free()

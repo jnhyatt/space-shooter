@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=3 uid="uid://d3j158iycdavv"]
+
+[ext_resource type="Script" uid="uid://7urviap31kua" path="res://spaceship/gun.gd" id="1_y4asp"]
+[ext_resource type="PackedScene" uid="uid://dlf6fxvpdcfab" path="res://laser.tscn" id="2_xl1gi"]
+[ext_resource type="SpriteFrames" uid="uid://kuoxf21esyu4" path="res://MuzzleFlashes/ef_1_red.tres" id="3_fjhfp"]
+[ext_resource type="AudioStream" uid="uid://cdkjk51rfnmwm" path="res://kenney_sci-fi-sounds/Audio/laserSmall_001.ogg" id="4_0t2py"]
+
+[node name="RightLaser" type="Node3D"]
+script = ExtResource("1_y4asp")
+ammo = ExtResource("2_xl1gi")
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.9, 0)
+billboard = 2
+sprite_frames = ExtResource("3_fjhfp")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("4_0t2py")

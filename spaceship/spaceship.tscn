@@ -1,9 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://bj6ouwmmb5pap"]
+[gd_scene load_steps=8 format=3 uid="uid://bj6ouwmmb5pap"]
 
 [ext_resource type="PhysicsMaterial" uid="uid://bqdiyl4qgrs4e" path="res://spaceship/spaceship-physics.tres" id="1_4kglo"]
 [ext_resource type="Script" uid="uid://q8wjii665joh" path="res://spaceship/spaceship.gd" id="1_7g3nn"]
 [ext_resource type="PackedScene" uid="uid://bxqo8dbmxfxje" path="res://spaceship/Spaceship.glb" id="2_pmkdn"]
 [ext_resource type="PackedScene" uid="uid://cvbhcgnrjag7t" path="res://damager.tscn" id="4_86gyh"]
+[ext_resource type="Script" uid="uid://dnc7rkwkma4rx" path="res://spaceship/weapons.gd" id="5_jjjul"]
+[ext_resource type="PackedScene" uid="uid://d3j158iycdavv" path="res://spaceship/laser_gun.tscn" id="6_5i66y"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_0xm2m"]
 radius = 3.0
@@ -39,6 +41,20 @@ autostart = true
 
 [node name="Damager" parent="." instance=ExtResource("4_86gyh")]
 
+[node name="Weapons" type="Node3D" parent="." node_paths=PackedStringArray("gun_points")]
+script = ExtResource("5_jjjul")
+gun_points = [NodePath("RightLaser"), NodePath("LeftLaser")]
+
+[node name="RightLaser" parent="Weapons" instance=ExtResource("6_5i66y")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.25, 1.85031, 0)
+
+[node name="LeftLaser" parent="Weapons" instance=ExtResource("6_5i66y")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.25, 1.85, 0)
+
+[node name="LaserCooldown" type="Timer" parent="Weapons"]
+wait_time = 0.12
+
 [connection signal="body_entered" from="." to="Damager" method="deal_damage_to"]
 [connection signal="timeout" from="ShieldWaitTimer" to="ShieldChargeTick" method="start"]
 [connection signal="timeout" from="ShieldChargeTick" to="." method="tick_shield_charge"]
+[connection signal="timeout" from="Weapons/LaserCooldown" to="Weapons" method="fire"]

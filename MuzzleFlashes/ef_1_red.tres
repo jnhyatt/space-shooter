@@ -1,0 +1,51 @@
+[gd_resource type="SpriteFrames" load_steps=7 format=3 uid="uid://kuoxf21esyu4"]
+
+[ext_resource type="Texture2D" uid="uid://chfhfjia7bq5s" path="res://MuzzleFlashes/ef_1_red_SpriteSheet.png" id="1_dfe6l"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dfe6l"]
+atlas = ExtResource("1_dfe6l")
+region = Rect2(0, 512, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ke04i"]
+atlas = ExtResource("1_dfe6l")
+region = Rect2(512, 0, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lotjy"]
+atlas = ExtResource("1_dfe6l")
+region = Rect2(512, 512, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e4gpq"]
+atlas = ExtResource("1_dfe6l")
+region = Rect2(0, 0, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_13ja0"]
+atlas = ExtResource("1_dfe6l")
+region = Rect2(0, 512, 512, 512)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dfe6l")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ke04i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lotjy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e4gpq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_13ja0")
+}],
+"loop": false,
+"name": &"fire",
+"speed": 30.0
+}]
