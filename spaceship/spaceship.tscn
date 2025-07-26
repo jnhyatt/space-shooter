@@ -1,0 +1,44 @@
+[gd_scene load_steps=6 format=3 uid="uid://bj6ouwmmb5pap"]
+
+[ext_resource type="PhysicsMaterial" uid="uid://bqdiyl4qgrs4e" path="res://spaceship/spaceship-physics.tres" id="1_4kglo"]
+[ext_resource type="Script" uid="uid://q8wjii665joh" path="res://spaceship/spaceship.gd" id="1_7g3nn"]
+[ext_resource type="PackedScene" uid="uid://bxqo8dbmxfxje" path="res://spaceship/Spaceship.glb" id="2_pmkdn"]
+[ext_resource type="PackedScene" uid="uid://cvbhcgnrjag7t" path="res://damager.tscn" id="4_86gyh"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_0xm2m"]
+radius = 3.0
+
+[node name="Player" type="RigidBody3D"]
+collision_mask = 10
+axis_lock_linear_z = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+physics_material_override = ExtResource("1_4kglo")
+contact_monitor = true
+max_contacts_reported = 8
+script = ExtResource("1_7g3nn")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_0xm2m")
+
+[node name="Spaceship" parent="." instance=ExtResource("2_pmkdn")]
+transform = Transform3D(-0.015, -1.31134e-09, -5.73206e-17, 0, -6.55671e-10, 0.015, -1.31134e-09, 0.015, 6.55671e-10, 0, 0, 0)
+
+[node name="InvulnerabilityTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[node name="ShieldWaitTimer" type="Timer" parent="."]
+wait_time = 4.0
+one_shot = true
+
+[node name="ShieldChargeTick" type="Timer" parent="."]
+wait_time = 0.2
+autostart = true
+
+[node name="Damager" parent="." instance=ExtResource("4_86gyh")]
+
+[connection signal="body_entered" from="." to="Damager" method="deal_damage_to"]
+[connection signal="timeout" from="ShieldWaitTimer" to="ShieldChargeTick" method="start"]
+[connection signal="timeout" from="ShieldChargeTick" to="." method="tick_shield_charge"]

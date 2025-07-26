@@ -1,0 +1,80 @@
+[gd_scene load_steps=11 format=3 uid="uid://cc2w2krr7d5cw"]
+
+[ext_resource type="PackedScene" uid="uid://bj6ouwmmb5pap" path="res://spaceship/spaceship.tscn" id="1_h2yge"]
+[ext_resource type="PackedScene" uid="uid://g8whwheybpp7" path="res://stars/stars.tscn" id="3_1bvp3"]
+[ext_resource type="PackedScene" uid="uid://d3a8l1qupi8or" path="res://hud.tscn" id="3_h2yge"]
+[ext_resource type="PackedScene" uid="uid://pwptfcxlbsgb" path="res://asteroids/asteroid1.tscn" id="4_1bvp3"]
+[ext_resource type="PackedScene" uid="uid://benfxvy65dh02" path="res://asteroids/asteroid2.tscn" id="5_272bh"]
+[ext_resource type="PackedScene" uid="uid://bjkuhtroe0g2e" path="res://asteroids/asteroid3.tscn" id="6_5vw27"]
+[ext_resource type="PackedScene" uid="uid://cop0h1qf4te4d" path="res://asteroids/asteroid4.tscn" id="7_kek77"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_272bh"]
+friction = 0.0
+bounce = 1.0
+absorbent = true
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_h2yge"]
+
+[sub_resource type="Environment" id="Environment_h2yge"]
+background_mode = 1
+
+[node name="MainRoot" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 5.96046e-08, 0, -5.96046e-08, 1, 0, 0, 130)
+fov = 30.0
+size = 10.0
+near = 1.0
+
+[node name="Player" parent="." instance=ExtResource("1_h2yge")]
+
+[node name="HUD" parent="." node_paths=PackedStringArray("player") instance=ExtResource("3_h2yge")]
+player = NodePath("../Player")
+
+[node name="Walls" type="StaticBody3D" parent="."]
+collision_layer = 8
+collision_mask = 0
+physics_material_override = SubResource("PhysicsMaterial_272bh")
+
+[node name="Bottom" type="CollisionShape3D" parent="Walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -32, 0)
+shape = SubResource("WorldBoundaryShape3D_h2yge")
+
+[node name="Top" type="CollisionShape3D" parent="Walls"]
+transform = Transform3D(-1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 0, 32, 0)
+shape = SubResource("WorldBoundaryShape3D_h2yge")
+
+[node name="Left" type="CollisionShape3D" parent="Walls"]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, -60, 0, 0)
+shape = SubResource("WorldBoundaryShape3D_h2yge")
+
+[node name="Right" type="CollisionShape3D" parent="Walls"]
+transform = Transform3D(1.31134e-07, -1, 0, 1, 1.31134e-07, 0, 0, 0, 1, 60, 0, 0)
+shape = SubResource("WorldBoundaryShape3D_h2yge")
+
+[node name="Environment" type="Node3D" parent="."]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Environment"]
+environment = SubResource("Environment_h2yge")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Environment"]
+transform = Transform3D(1, 0, 0, 0, 1, 1.06581e-14, 0, -1.06581e-14, 1, 0, 0, 0)
+
+[node name="Stars" parent="Environment" instance=ExtResource("3_1bvp3")]
+
+[node name="Asteroid" parent="." instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.8515, 12.1976, 0)
+
+[node name="Asteroid2" parent="." instance=ExtResource("5_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.7486, 22.2474, 0)
+
+[node name="Asteroid3" parent="." instance=ExtResource("6_5vw27")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.88357, 23.5579, 3.8147e-06)
+
+[node name="Asteroid4" parent="." instance=ExtResource("7_kek77")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.02149, 15.4099, 0)
+
+[connection signal="body_entered" from="Asteroid" to="Asteroid/Damager" method="deal_damage_to"]
+[connection signal="body_entered" from="Asteroid2" to="Asteroid2/Damager" method="deal_damage_to"]
+[connection signal="body_entered" from="Asteroid3" to="Asteroid3/Damager" method="deal_damage_to"]
+[connection signal="body_entered" from="Asteroid4" to="Asteroid4/Damager" method="deal_damage_to"]

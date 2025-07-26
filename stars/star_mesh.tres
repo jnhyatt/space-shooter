@@ -1,0 +1,11 @@
+[gd_resource type="SphereMesh" load_steps=2 format=3 uid="uid://o8wibey50xt5"]
+
+[ext_resource type="Material" uid="uid://ctd2yb2y1faht" path="res://stars/star_material.tres" id="1_uj58i"]
+
+[resource]
+material = ExtResource("1_uj58i")
+radius = 0.2
+height = 0.001
+radial_segments = 24
+rings = 1
+is_hemisphere = true

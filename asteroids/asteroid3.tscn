@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://bjkuhtroe0g2e"]
+
+[ext_resource type="PackedScene" uid="uid://b2q0pgmdmubo6" path="res://asteroids/asteroid.tscn" id="1_cw6tr"]
+[ext_resource type="ArrayMesh" uid="uid://dumko1wwwhis2" path="res://asteroids/bigasteroid3.res" id="2_cw6tr"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_y0ukb"]
+radius = 2.08171
+
+[node name="Asteroid" instance=ExtResource("1_cw6tr")]
+
+[node name="MeshInstance3D" parent="." index="0"]
+mesh = ExtResource("2_cw6tr")
+
+[node name="CollisionShape3D" parent="." index="1"]
+shape = SubResource("SphereShape3D_y0ukb")

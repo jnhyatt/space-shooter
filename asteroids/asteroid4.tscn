@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://cop0h1qf4te4d"]
+
+[ext_resource type="PackedScene" uid="uid://b2q0pgmdmubo6" path="res://asteroids/asteroid.tscn" id="1_v2y0t"]
+[ext_resource type="ArrayMesh" uid="uid://djqhksb14te55" path="res://asteroids/bigasteroid4.res" id="2_v2y0t"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_g68dq"]
+radius = 1.42303
+height = 7.44712
+
+[node name="Asteroid" instance=ExtResource("1_v2y0t")]
+
+[node name="MeshInstance3D" parent="." index="0"]
+mesh = ExtResource("2_v2y0t")
+
+[node name="CollisionShape3D" parent="." index="1"]
+transform = Transform3D(-3.5663e-08, 0.815875, 0.578228, -1, -4.37114e-08, 0, 2.52751e-08, -0.578228, 0.815875, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_g68dq")
