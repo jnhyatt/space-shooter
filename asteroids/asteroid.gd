@@ -14,7 +14,7 @@ func _ready():
 		randf_range(-PI, PI),
 	)
 
-func take_damage(amount: int):
+func take_damage(amount: int, _pos):
 	hp -= amount
 	if hp <= 0:
 		queue_free()

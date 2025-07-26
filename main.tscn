@@ -17,6 +17,7 @@ absorbent = true
 
 [sub_resource type="Environment" id="Environment_h2yge"]
 background_mode = 1
+glow_enabled = true
 
 [node name="MainRoot" type="Node3D"]
 

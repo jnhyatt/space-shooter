@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bj6ouwmmb5pap"]
+[gd_scene load_steps=17 format=4 uid="uid://bj6ouwmmb5pap"]
 
 [ext_resource type="PhysicsMaterial" uid="uid://bqdiyl4qgrs4e" path="res://spaceship/spaceship-physics.tres" id="1_4kglo"]
 [ext_resource type="Script" uid="uid://q8wjii665joh" path="res://spaceship/spaceship.gd" id="1_7g3nn"]
@@ -6,9 +6,181 @@
 [ext_resource type="PackedScene" uid="uid://cvbhcgnrjag7t" path="res://damager.tscn" id="4_86gyh"]
 [ext_resource type="Script" uid="uid://dnc7rkwkma4rx" path="res://spaceship/weapons.gd" id="5_jjjul"]
 [ext_resource type="PackedScene" uid="uid://d3j158iycdavv" path="res://spaceship/laser_gun.tscn" id="6_5i66y"]
+[ext_resource type="Shader" uid="uid://bmnky5p023ey0" path="res://shield/shield_with_impacts.gdshader" id="7_xs0r8"]
+[ext_resource type="Script" uid="uid://b123o8yxicp83" path="res://shield/shield.gd" id="8_08jab"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_0xm2m"]
 radius = 3.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jwaci"]
+render_priority = 0
+shader = ExtResource("7_xs0r8")
+shader_parameter/color = Color(0.220274, 0.674508, 1, 1)
+shader_parameter/emission = 10.0
+shader_parameter/fresnel_sharpness = 8.0
+shader_parameter/extend_distance = 0.0
+shader_parameter/impact_points = PackedVector4Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/impact_size = 5.0
+shader_parameter/impact_falloff_sharpness = 1.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_5i66y"]
+radius = 4.5
+height = 9.0
+
+[sub_resource type="Animation" id="Animation_xs0r8"]
+resource_name = "shield_drop"
+length = 1.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D:material_override:shader_parameter/color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.220274, 0.674508, 1, 1), Color(0.333333, 0.72549, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MeshInstance3D:material_override:shader_parameter/fresnel_sharpness")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.133333),
+"transitions": PackedFloat32Array(0.297302, 1),
+"update": 0,
+"values": [8.0, 1.055]
+}
+
+[sub_resource type="Animation" id="Animation_08jab"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D:transparency")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MeshInstance3D:material_override:shader_parameter/color:a")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("MeshInstance3D:material_override:shader_parameter/emission")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [10.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("MeshInstance3D:material_override:shader_parameter/fresnel_sharpness")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [8.0]
+}
+
+[sub_resource type="Animation" id="Animation_jwaci"]
+resource_name = "hit"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D:material_override:shader_parameter/emission")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(0.366022, 1),
+"update": 0,
+"values": [30.0, 5.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MeshInstance3D:material_override:shader_parameter/fresnel_sharpness")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1.46409, 1),
+"update": 0,
+"values": [5.0, 8.0]
+}
+
+[sub_resource type="Animation" id="Animation_brwsj"]
+resource_name = "shield_raise"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D:material_override:shader_parameter/color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.333333, 0.72549, 1, 0), Color(0.220274, 0.674508, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MeshInstance3D:material_override:shader_parameter/fresnel_sharpness")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.266667, 2),
+"transitions": PackedFloat32Array(1, 6.27667, 0.297302),
+"update": 0,
+"values": [6.0, 1.5, 8.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("MeshInstance3D:material_override:shader_parameter/emission")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.366667, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [1.0, 8.0, 5.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jwaci"]
+_data = {
+&"RESET": SubResource("Animation_08jab"),
+&"hit": SubResource("Animation_jwaci"),
+&"shield_drop": SubResource("Animation_xs0r8"),
+&"shield_raise": SubResource("Animation_brwsj")
+}
 
 [node name="Player" type="RigidBody3D"]
 collision_mask = 10
@@ -53,6 +225,21 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.25, 1.85, 0)
 
 [node name="LaserCooldown" type="Timer" parent="Weapons"]
 wait_time = 0.12
+
+[node name="Shield" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Shield"]
+material_override = SubResource("ShaderMaterial_jwaci")
+cast_shadow = 0
+mesh = SubResource("SphereMesh_5i66y")
+skeleton = NodePath("../..")
+script = ExtResource("8_08jab")
+decay_speed = 4.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Shield"]
+libraries = {
+&"": SubResource("AnimationLibrary_jwaci")
+}
 
 [connection signal="body_entered" from="." to="Damager" method="deal_damage_to"]
 [connection signal="timeout" from="ShieldWaitTimer" to="ShieldChargeTick" method="start"]
