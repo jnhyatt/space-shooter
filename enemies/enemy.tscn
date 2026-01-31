@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://dw86qohdemxmw"]
+
+[ext_resource type="PackedScene" uid="uid://4osq512mlg1u" path="res://enemies/enemy1.glb" id="1_fw1ev"]
+[ext_resource type="PackedScene" uid="uid://d3j158iycdavv" path="res://spaceship/laser_gun.tscn" id="3_a6vjd"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_7frlh"]
+radius = 4.93726
+
+[node name="Enemy" type="RigidBody3D"]
+collision_layer = 16
+collision_mask = 3
+axis_lock_linear_z = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+mass = 10.0
+
+[node name="Root Scene" parent="." instance=ExtResource("1_fw1ev")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+
+[node name="Gun" parent="." instance=ExtResource("3_a6vjd")]
+transform = Transform3D(1, 8.74228e-08, 8.74228e-08, 8.74228e-08, -1, 7.64274e-15, 8.74228e-08, 0, -1, 0.087191, -3.75275, -0.156015)
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_7frlh")
+
+[connection signal="timeout" from="Timer" to="Gun" method="fire"]

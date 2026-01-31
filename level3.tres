@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="Level" load_steps=7 format=3 uid="uid://bugqeinj6hyqx"]
+
+[ext_resource type="Script" uid="uid://c7xskxp7dt8fw" path="res://level.gd" id="1_vm5r5"]
+[ext_resource type="Script" uid="uid://bcsbpl8yg5ocl" path="res://wave.gd" id="2_2lc8t"]
+[ext_resource type="Script" uid="uid://dx1t6gds3p0sh" path="res://enemy_group.gd" id="3_c6o5u"]
+[ext_resource type="PackedScene" uid="uid://bbyfq7rsn86kc" path="res://enemy1.tscn" id="4_w3bpu"]
+
+[sub_resource type="Resource" id="Resource_3v6kc"]
+script = ExtResource("3_c6o5u")
+enemy = ExtResource("4_w3bpu")
+count = 3
+metadata/_custom_type_script = "uid://dx1t6gds3p0sh"
+
+[sub_resource type="Resource" id="Resource_mrca3"]
+script = ExtResource("2_2lc8t")
+spawns = Array[ExtResource("3_c6o5u")]([SubResource("Resource_3v6kc")])
+metadata/_custom_type_script = "uid://bcsbpl8yg5ocl"
+
+[resource]
+script = ExtResource("1_vm5r5")
+waves = Array[ExtResource("2_2lc8t")]([SubResource("Resource_mrca3")])
+metadata/_custom_type_script = "uid://c7xskxp7dt8fw"

@@ -13,6 +13,9 @@ ammo = ExtResource("2_xl1gi")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.9, 0)
 billboard = 2
 sprite_frames = ExtResource("3_fjhfp")
+animation = &"fire"
+frame = 3
+frame_progress = 1.0
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("4_0t2py")

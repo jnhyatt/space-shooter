@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://cc2w2krr7d5cw"]
+[gd_scene load_steps=17 format=3 uid="uid://cc2w2krr7d5cw"]
 
 [ext_resource type="PackedScene" uid="uid://bj6ouwmmb5pap" path="res://spaceship/spaceship.tscn" id="1_h2yge"]
 [ext_resource type="PackedScene" uid="uid://g8whwheybpp7" path="res://stars/stars.tscn" id="3_1bvp3"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://cop0h1qf4te4d" path="res://asteroids/asteroid4.tscn" id="7_kek77"]
 [ext_resource type="PackedScene" uid="uid://dx0fgk3nsun8c" path="res://asteroids/asteroid5.tscn" id="8_kek77"]
 [ext_resource type="Script" uid="uid://brldmmchbxeev" path="res://stars/killer.gd" id="9_kek77"]
+[ext_resource type="PackedScene" uid="uid://dw86qohdemxmw" path="res://enemies/enemy.tscn" id="10_4c57u"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_272bh"]
 friction = 0.0
@@ -100,7 +101,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 1.06581e-14, 0, -1.06581e-14, 1, 0, 0, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 40, 0)
 script = SubResource("GDScript_kek77")
 asteroids = Array[PackedScene]([ExtResource("4_1bvp3"), ExtResource("5_272bh"), ExtResource("6_5vw27"), ExtResource("7_kek77"), ExtResource("8_kek77")])
-spawn_rate = 10.0
+spawn_rate = 2.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Asteroids/AsteroidSpawner"]
 shape = SubResource("BoxShape3D_7mycd")
@@ -118,5 +119,8 @@ shape = SubResource("WorldBoundaryShape3D_5vw27")
 [node name="AudioListener3D" type="AudioListener3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 50)
 current = true
+
+[node name="Enemy" parent="." instance=ExtResource("10_4c57u")]
+transform = Transform3D(1, 0, 0, 0, 1, -1.06581e-14, 0, 1.06581e-14, 1, -0.492, 22.8875, 0)
 
 [connection signal="body_entered" from="Asteroids/AsteroidKiller" to="Asteroids/AsteroidKiller" method="kill"]

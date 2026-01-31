@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://qxd6hu1s6t15"
+path="res://.godot/imported/Red Doors 2.0 (GameClosure Edition)_0.mp3-c58bfe155cb0291f65111ebc78264b53.mp3str"
+
+[deps]
+
+source_file="res://Red Doors 2.0 (GameClosure Edition)_0.mp3"
+dest_files=["res://.godot/imported/Red Doors 2.0 (GameClosure Edition)_0.mp3-c58bfe155cb0291f65111ebc78264b53.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

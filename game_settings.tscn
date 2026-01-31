@@ -1,0 +1,11 @@
+[gd_scene load_steps=6 format=3 uid="uid://1qrfa617g3yo"]
+
+[ext_resource type="Script" uid="uid://4und7h0lardu" path="res://game_settings.gd" id="1_5cjxi"]
+[ext_resource type="Script" uid="uid://c7xskxp7dt8fw" path="res://level.gd" id="2_d3xec"]
+[ext_resource type="Resource" uid="uid://bwabpthbbjebm" path="res://level1.tres" id="3_whu6v"]
+[ext_resource type="Resource" uid="uid://cani02l762tvu" path="res://level2.tres" id="4_ij7ky"]
+[ext_resource type="Resource" uid="uid://bugqeinj6hyqx" path="res://level3.tres" id="5_jjwbj"]
+
+[node name="GameSettings" type="Node"]
+script = ExtResource("1_5cjxi")
+levels = Array[ExtResource("2_d3xec")]([ExtResource("3_whu6v"), ExtResource("4_ij7ky"), ExtResource("5_jjwbj")])

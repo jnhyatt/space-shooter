@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Level" load_steps=3 format=3 uid="uid://cani02l762tvu"]
+
+[ext_resource type="Script" uid="uid://c7xskxp7dt8fw" path="res://level.gd" id="1_hvuhm"]
+[ext_resource type="Script" uid="uid://bcsbpl8yg5ocl" path="res://wave.gd" id="2_srmso"]
+
+[resource]
+script = ExtResource("1_hvuhm")
+waves = Array[ExtResource("2_srmso")]([])
+metadata/_custom_type_script = "uid://c7xskxp7dt8fw"
